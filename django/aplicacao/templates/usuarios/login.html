@@ -27,6 +27,7 @@
                     <form action="{% url 'login' %}" method="POST">
                         {% csrf_token %}
                         <div class="row">
+                            {% include 'partials/_alertas.html' %}
                             <div class="col-12 col-lg-12">
                             <label for="email"><b>Email</b></label>
                                 <input type="text" id="email" class="form-control" name="email" placeholder="Entre com o email cadastrado">
