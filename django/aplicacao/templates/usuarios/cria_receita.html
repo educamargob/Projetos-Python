@@ -25,14 +25,23 @@
        <div class="row">
            <div class="col-12">
            <p>Todos os campos são obrigatórios</p>
+           
                <div class="contact-form-area">
                    <form action="{% url 'cria_receita' %}" method="POST" enctype="multipart/form-data">
                            {% csrf_token %}
                        <div class="row">
-                           <div class="col-12 col-lg-12">
+                           <div class="col-10 col-lg-10">
                                <label for="nome_receita"><b>Título da receita</b></label>
                                <input type="text" id="nome_receita" class="form-control" name="nome_receita" placeholder="Ex. Suco de limão" required>
                            </div>
+                            <div class="col-2 col-lg-2">
+                                <div class="mt-30">
+                                    <input class="form-check-input" type="checkbox" value="True" id="chkpublicada" name="publicada" checked>
+                                    <label class="form-check-label" for="chkpublicada">
+                                        Publicar receita
+                                    </label>
+                                </div>
+                            </div>
                            <div class="col-12">
                                <label for="file"><b>Ingredientes</b></label>
                                <textarea class="form-control" name="ingredientes" cols="30" rows="10" placeholder="Ex. 2 Limões &#10;200ml de água" required></textarea>
