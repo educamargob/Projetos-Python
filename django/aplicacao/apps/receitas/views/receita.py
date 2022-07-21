@@ -18,7 +18,6 @@ def index(request):
     }
     return render(request,'receitas/index.html', dados)
 
-
 def receita(request, receita_id):
     """Abre a receita requisitada"""
     receita = get_object_or_404(Receita, pk=receita_id)

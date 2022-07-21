@@ -32,13 +32,14 @@
                     <!-- Single Best Receipe Area -->
                     <div class="col-12 col-sm-6 col-lg-4">
                         <div class="single-best-receipe-area mb-30">
+                            <a href="{% url 'receita' receita.id %}">
                         {% if receita.foto_receita == '' %}
                             <img src="{% static 'img/bg-img/foto_receita.png'%}" alt="">
                         {% else %}
                             <img src="{{ receita.foto_receita.url }}" alt="">
                         {% endif %}
                             <div class="receipe-content">
-                                <a href="{% url 'receita' receita.id %}">
+                                
                                     <h5>{{ receita.nome_receita }}</h5>
                                     <a href="{% url 'edita_receita' receita.id %}" type="button" class="btn btn-info">Editar</a>
                                     <a href="{% url 'deleta_receita' receita.id %}" type="button" class="btn btn-danger">Deletar</a>
