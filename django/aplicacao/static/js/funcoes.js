@@ -1,7 +1,6 @@
+console.log("FOIIII");
 var checkbox = document.querySelector("input[name=checkbox]");
-checkbox.addEventListener("change", verificaCheck());
 function verificaCheck()
-    alert('FOI')
     if(checkbox.checked) {
         console.log("O cliente marcou o checkbox");
     } else {
