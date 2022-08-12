@@ -19,16 +19,16 @@ class Programa:
     def dar_like(self):
         self._likes += 1
 
-    def imprime(self):
-        print(f'{self._nome} - {self.ano} - {self._likes}')
+    def __str__(self):
+        return f'{self._nome} - {self.ano} - {self._likes}'
 
 class Filme(Programa):
     def __init__(self, nome, ano, duracao):
         super().__init__(nome, ano)
         self.duracao = duracao
 
-    def imprime(self):
-        print(f'{self._nome} - {self.ano} - {self.duracao} - min {self._likes} - likes ')
+    def __str__(self):
+        return f'{self._nome} - {self.ano} - {self.duracao} - min {self._likes} - likes '
 
 
 class Serie(Programa):
@@ -36,21 +36,48 @@ class Serie(Programa):
         super().__init__(nome, ano)
         self.temporadas = temporadas
 
-    def imprime(self):
-        print(f'{self._nome} - {self.ano} - {self.temporadas} - temporadas {self._likes} - likes')
+    def __str__(self):
+        return f'{self._nome} - {self.ano} - {self.temporadas} - temporadas {self._likes} - likes'
+
+class Playlist:
+    def __init__(self, nome, programas):
+        self.nome = nome
+        self._programas = programas
+
+    def __getitem__(self, item):
+        return self._programas[item]
+
+    @property
+    def listagem(self):
+        return self._programas
+
+    @property
+    def tamanho(self):
+        return len(self._programas)
 
 
-vingadores = Filme('vingadores', 2018, 160)
-vingadores.dar_like()
+def main():
+    vingadores = Filme('vingadores', 2018, 160)
+    atlanta = Serie('atlanta', 2017, 2)
+    tmep = Filme('Todo mundo em pânico', 1999, 100)
+    demolidor = Serie('Demolidor',2016, 2)
 
+    vingadores.dar_like()
+    demolidor.dar_like()
+    demolidor.dar_like()
+    demolidor.dar_like()
+    demolidor.dar_like()
+    tmep.dar_like()
+    atlanta.dar_like()
+    atlanta.dar_like()
 
-atlanta = Serie('atlanta', 2017, 2)
-atlanta.dar_like()
-atlanta.dar_like()
+    filmes_e_series = [vingadores, atlanta, demolidor, tmep]
 
-filmes_e_series = [vingadores, atlanta]
+    playlist_fim_de_semana = Playlist('fim de semana', filmes_e_series)
 
-for programa in filmes_e_series:
-    programa.imprime()
+    for programa in playlist_fim_de_semana.listagem:
+        print(programa)
 
+if __name__ == "__main__":
+    main()
 
