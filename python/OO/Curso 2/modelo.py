@@ -75,7 +75,7 @@ def main():
 
     playlist_fim_de_semana = Playlist('fim de semana', filmes_e_series)
 
-    for programa in playlist_fim_de_semana.listagem:
+    for programa in playlist_fim_de_semana:
         print(programa)
 
 if __name__ == "__main__":

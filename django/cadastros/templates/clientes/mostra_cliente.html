@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <p>Nome do cliente: {{ form.nome.value }}</p>
+    <p>Endereco do cliente: {{ form.endereco.value }}</p>
+    <p>Bairro do cliente: {{ form.bairro.value }}</p>
+    <p>Cidade do cliente: {{ form.cidade.value }}</p>
+    <p>CEP do cliente: {{ form.cep.value }}</p>
+    <p>CNPJ do cliente: {{ form.cnpj.value }}</p>
+
+{% endblock %}
