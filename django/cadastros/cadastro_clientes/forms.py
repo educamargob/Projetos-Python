@@ -1,7 +1,6 @@
 from socket import fromshare
 from unittest.util import _MAX_LENGTH
 from django import forms
-from cadastro_clientes.estados import estados
 from cadastro_clientes.validation import *
 from datetime import datetime
 from cadastro_clientes.models import Cliente, Estados

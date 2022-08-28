@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load  static %}
+{% block content %}
+    <section>
+        <table class="table mt-4">
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Foto</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Data Criação</th>
+            <th scope="col">Operações</th>
+            {% if produtos %}
+                {% for produto in produtos %}
+                <tr>
+                    <td>{{ produto.id }}</td>
+                    <td>{{ produto.nome_produto }}</td>
+                    <td>
+                        {% if produto.foto_produto %}
+                            <img src="{{ produto.foto_produto.url }}" alt="" style="width: 50px; height: 30px; object-fit: cover;">
+                        {% else %}
+                            none
+                        {% endif %}
+                    </td>
+                    <td>{{ produto.categoria }}</td>
+                    <td>{{ produto.preco }}</td>
+                    <td>{{ produto.descricao }}</td>
+                    <td>{{ produto.data_criacao }}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
+        <div class="container">
+            {% if produtos.has_other_pages %}
+                <ul class="pagination">
+                    {% if produtos.has_previous %}
+                    <li class="page-item">
+                        <a href="?page={{ produtos.previous_page_number }}" class="page-link">&laquo;</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link">&laquo;</a>
+                    </li>
+                    {% endif %}
+                    {% for pagina in produtos.paginator.page_range %}
+                        {% if produtos.number ==  pagina %}
+                        <li class="page-item active">
+                            <a class="page-link">{{ pagina }}</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a href="?page={{pagina}}" class="page-link">{{ pagina }}</a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if produtos.has_next %}           
+                        <li class="page-item">
+                            <a href="?page={{ produtos.next_page_number }}" class="page-link">&raquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link">&raquo;</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+        <a href="{% url 'cadastro_produtos' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Cadastrar novo produto</a>
+    </section>
+{% endblock %}
