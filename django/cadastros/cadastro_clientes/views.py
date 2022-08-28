@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render, get_list_or_404, redirect
 from django.http import HttpResponse
-from cadastro_clientes.models import Cliente
+from cadastro_clientes.models import Cliente, Estados
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import *
 
@@ -26,16 +26,22 @@ def cadastro_clientes(request):
 def cria_cliente(request):
     """Inserir cliente no sistema"""
     if request.method == 'POST':
-        nome_cliente = request.POST['nome_cliente']
-        endereco = request.POST['endereco']
-        bairro = request.POST['bairro']
-        cidade = request.POST['cidade']
-        cep = request.POST['cep']
-        cnpj = request.POST['cnpj']
-        cliente = Cliente.objects.create(nome_cliente=nome_cliente, endereco=endereco, bairro=bairro, cidade=cidade, cep=cep, cnpj=cnpj)
-        cliente.save()
-        return redirect('lista_clientes')
-
+        form = ClientesForms(request.POST)
+        if form.is_valid():
+            nome_cliente = request.POST['nome_cliente']
+            endereco = request.POST['endereco']
+            bairro = request.POST['bairro']
+            cidade = request.POST['cidade']
+            estado = request.POST['estado']
+            cep = request.POST['cep']
+            cnpj = request.POST['cnpj']
+            cliente = Cliente.objects.create(nome_cliente=nome_cliente, endereco=endereco, bairro=bairro, cidade=cidade, estado=estado, cep=cep, cnpj=cnpj)
+            cliente.save()
+            return redirect('lista_clientes')
+        else:
+            contexto = {'form':form}
+            return render(request, 'clientes/cadastro_clientes.html', contexto)
+            
 def mostra_cliente(request):
     if request.method == 'POST':
         form = ClientesForms(request.POST)
