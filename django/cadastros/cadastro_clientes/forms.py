@@ -6,11 +6,21 @@ from datetime import datetime
 from cadastro_clientes.models import Cliente, Estados
 
 class ClientesForms(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ClientesForms, self).__init__(*args, **kwargs)
+        self.fields['cep'].widget.attrs['class'] = 'mask-cep'
+        self.fields['cnpj'].widget.attrs['class'] = 'mask-cnpj'
     data_criacao = forms.DateField(label='Data da criação', disabled=True, initial=datetime.today)
+    class Media:
+        js= (
+            "js/jquery.mask.min.js",
+            "js/custom.js",
+        )
     class Meta:
         model = Cliente
         fields = '__all__'
         labels = {'nome_cliente':'Nome','endereco':'Endereço','cnpj':'CNPJ','cep':'CEP'}
+
 
 
     def clean(self):

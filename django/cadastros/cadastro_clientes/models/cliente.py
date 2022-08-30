@@ -10,8 +10,8 @@ class Cliente(models.Model):
     bairro = models.CharField(max_length=70)
     cidade = models.CharField(max_length=70)
     estado = models.CharField(max_length=50,choices=Estados.choices, default=0)
-    cep = models.CharField(max_length=8)
-    cnpj = models.CharField(max_length=14)
+    cep = models.CharField(max_length=9)
+    cnpj = models.CharField(max_length=19)
     data_criacao = models.DateTimeField(default=datetime.now, blank=True)
     
     def __str__(self):
