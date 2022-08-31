@@ -10,7 +10,14 @@ class UploadFileForm(forms.Form):
     file = forms.FileField()
 
 class ProdutosForms(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ProdutosForms, self).__init__(*args, **kwargs)
+        self.fields['preco'].widget.attrs['class'] = 'mask-preco'
     data_criacao = forms.DateField(label='Data da criação', disabled=True, initial=datetime.today)
+    class Media:
+        js= (
+            "js/form.js",
+        )
     class Meta:
         model = Produtos
         fields = '__all__'

@@ -10,11 +10,11 @@ class ClientesForms(forms.ModelForm):
         super(ClientesForms, self).__init__(*args, **kwargs)
         self.fields['cep'].widget.attrs['class'] = 'mask-cep'
         self.fields['cnpj'].widget.attrs['class'] = 'mask-cnpj'
+        
     data_criacao = forms.DateField(label='Data da criação', disabled=True, initial=datetime.today)
     class Media:
         js= (
-            "js/jquery.mask.min.js",
-            "js/custom.js",
+            "js/form.js",
         )
     class Meta:
         model = Cliente

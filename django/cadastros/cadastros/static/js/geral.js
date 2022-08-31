@@ -9,14 +9,8 @@ spOptions = {
 };
 
 django.jQuery(function(){
-
-    $('.mask-cep').mask('00000-000');
-    $('.mask-cnpj').mask('00.000.000/0000-00', {reverse: true});
-
-    $('#cliente_form').submit(function(){
-        $('#cliente_form').find(":input[class*='mask-']").unmask();
-        console.log('carregou')
-    }) 
+    $('.cliente-cep').mask('00000-000');
+    $('.cliente-cnpj').mask('00.000.000/0000-00', {reverse: true});
 });
 
   

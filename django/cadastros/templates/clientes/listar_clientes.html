@@ -13,13 +13,13 @@
             {% if clientes %}
                 {% for cliente in clientes %}
                 <tr>
-                    <td>{{ cliente.nome_cliente }}</td>
-                    <td>{{ cliente.endereco }}</td>
-                    <td>{{ cliente.bairro }}</td>
-                    <td>{{ cliente.cidade }}</td>
-                    <td>{{ cliente.estado }}</td>
-                    <td>{{ cliente.cep }}</td>
-                    <td>{{ cliente.cnpj }}</td>
+                    <td class="cliente-nome">{{ cliente.nome_cliente }}</td>
+                    <td class="cliente-endereco">{{ cliente.endereco }}</td>
+                    <td class="cliente-bairro">{{ cliente.bairro }}</td>
+                    <td class="cliente-cidade">{{ cliente.cidade }}</td>
+                    <td class="cliente-estado">{{ cliente.estado }}</td>
+                    <td class="cliente-cep">{{ cliente.cep }}</td>
+                    <td class="cliente-cnpj">{{ cliente.cnpj }}</td>
                     <td></td>
                 </tr>
                 {% endfor %}

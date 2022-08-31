@@ -2,10 +2,10 @@
 {% block content %}
 {% load widget_tweaks %}
 <section>
-    <form action="{% url 'cria_cliente' %}" method="POST">
+    <form action="{% url 'cria_cliente' %}" id="cliente_form" method="POST">
         {% csrf_token %}
         {% for field in form.visible_fields %}
-        <div class="form-group">
+        <div class="form-group" id="id_{{field.label}}">
             <label for="{{field.id_for_label}}">{{field.label}}</label>
             {{field|add_class:'form-control'}}
         </div>
