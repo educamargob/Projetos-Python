@@ -1,6 +1,65 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="d-flex justify-content-center">
-        <h1>Seja bem vindo</h1>
-    </div>
+    <section class="product-area">
+        <div class="container">
+            <div class="row">
+                {% if produtos %}
+                    {% for produto in produtos %}
+                    <div class="col-12 col-sm col-lg-4">
+                        <div class="single-product-area">
+                            {% if produto.foto_produto == '' %}
+                                <img src="" alt="">
+                            {% else %}
+                                <img src="{{ produto.foto_produto.url }}" alt="foto-produto" style="width: 350px; height: 230px; object-fit: cover;">
+                            {% endif %}
+                            <div class="produto-content">
+                                <h5>{{ produto.nome_produto }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <section class="top-catagory-area section-padding-20-0">
+        <div class="container">
+            {% if produtos.has_other_pages %}
+            <ul class="pagination">
+                {% if produtos.has_previous %}
+                <li class="page-item">
+                    <a href="?page={{ produtos.previous_page_number }}" class="page-link">&laquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">&laquo;</a>
+                </li>
+                {% endif %}
+
+                {% for pagina in produtos.paginator.page_range %}
+                    {% if produtos.number ==  pagina %}
+                    <li class="page-item active">
+                        <a class="page-link">{{ pagina }}</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a href="?page={{pagina}}" class="page-link">{{ pagina }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+                {% if produtos.has_next %}           
+                <li class="page-item">
+                    <a href="?page={{ produtos.next_page_number }}" class="page-link">&raquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">&raquo;</a>
+                </li>
+                {% endif %}
+                
+            </ul>
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}

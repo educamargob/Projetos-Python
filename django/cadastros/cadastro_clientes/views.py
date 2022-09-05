@@ -5,9 +5,6 @@ from cadastro_clientes.models import Cliente, Estados
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import *
 
-def index(request):
-    return render(request, 'index.html')
-
 def lista_clientes(request):
     clientes = Cliente.objects.order_by('-data_criacao')
     paginator = Paginator(clientes, 10)
