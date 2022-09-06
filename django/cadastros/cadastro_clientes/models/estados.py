@@ -28,4 +28,4 @@ class Estados(models.TextChoices):
     SANTA = 'SC', _('Santa Catarina')
     SAO = 'SP', _('São Paulo')
     SERGIPE = 'SE', _('Sergipe')
-    TOCANTINS = 'TO8', _('Tocantins')
+    TOCANTINS = 'TO', _('Tocantins')

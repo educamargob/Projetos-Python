@@ -18,3 +18,35 @@ footer{
 section{
     margin: 15px 0 15px 0;
 }
+
+
+.product-area {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 50px; }
+  
+  .single-product-area {
+    position: relative;
+    z-index: 1; 
+}
+    .single-product-area img {
+      border-bottom: 3px solid #ac763a;
+      width: 350px;
+      height: 230px;
+      object-fit: cover;}
+    .single-product-area .product-content {
+      padding-top: 30px;
+      text-align: center; }
+      .single-product-area .product-content h5 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-weight: 400;
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms; }
+        .single-product-area .product-content h5:hover, .single-product-area .product-content h5:focus {
+          color: #ac763a; }
+      .single-product-area .product-content .ratings i {
+        font-size: 11px;
+        color: #fbb710;
+        display: inline-block;
+        padding: 0 1px; }
