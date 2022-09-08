@@ -40,22 +40,37 @@ def cria_produto(request):
     if request.method == 'POST':
         form = ProdutosForms(request.POST, request.FILES)
         if form.is_valid():
-            nome_produto = request.POST['nome_produto']
-            categoria = request.POST['categoria']
-            preco = request.POST['preco']
-            descricao = request.POST['descricao']
-            foto_produto = request.FILES['foto_produto']
-            produto = Produtos.objects.create(nome_produto=nome_produto, categoria=categoria, preco=preco, descricao=descricao, foto_produto=foto_produto)
-            produto.save()
+            form.save()
             return redirect('lista_produtos')
         else:
-            contexto = {'form':form}
+            contexto = { 'form':form }
             return render(request, 'produtos/cadastro_produtos.html', contexto)
+
+def deleta_produto(request, produto_id):
+    """Deletar um produto do sistema"""
+    produto = get_object_or_404(Produtos, pk=produto_id)
+    produto.delete()
+    return redirect('lista_produtos')
+
+def altera_produto(request, produto_id):
+    """Alterar dados de um produto"""
+    produto = Produtos.objects.get(id=produto_id)
+    if request.method == 'POST':
+        form = ProdutosForms(request.POST, request.FILES, instance=produto)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_produtos')
+    else:
+        form = ProdutosForms(instance=produto)
+    produto_editar = { 'form':form }
+    return render(request, 'produtos/edita_produto.html', produto_editar)
+
+
             
 def mostra_produto(request):
     if request.method == 'POST':
         form = ProdutosForms(request.POST)
-        contexto = {'form':form}
+        contexto = { 'form':form }
         return render(request, 'produtos/mostra_produto.html', contexto)
 
 

@@ -26,8 +26,10 @@ class ProdutosForms(forms.ModelForm):
 
     def clean(self):
         preco = self.cleaned_data.get('preco')
+        foto_produto = self.cleaned_data.get('foto_produto')
         lista_de_erros = {}
         campo_ntem_numero(preco, 'preco', lista_de_erros)
+        verifica_imagem(foto_produto, 'foto_produto', lista_de_erros)
         if lista_de_erros is not None:
             for erro in lista_de_erros:
                 mensagem_erro = lista_de_erros[erro]

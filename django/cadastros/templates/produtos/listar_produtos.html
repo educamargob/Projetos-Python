@@ -27,7 +27,10 @@
                     <td>{{ produto.preco }}</td>
                     <td>{{ produto.descricao }}</td>
                     <td>{{ produto.data_criacao }}</td>
-                    <td></td>
+                    <td>
+                        <a class="btn btn-warning" type="button" href="{% url 'altera_produto' produto.id %}">Alterar</a>
+                        <a class="btn btn-danger" type="button" href="{% url 'deleta_produto' produto.id %}">Deletar</a>
+                    </td>
                 </tr>
                 {% endfor %}
             {% endif %}
