@@ -11,6 +11,7 @@ spOptions = {
 django.jQuery(function(){
     $('.cliente-cep').mask('00000-000');
     $('.cliente-cnpj').mask('00.000.000/0000-00', {reverse: true});
+    $('.mask-preco').mask("#.##0,00", {reverse: true});
 });
 
   

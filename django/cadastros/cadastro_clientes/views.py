@@ -46,3 +46,20 @@ def mostra_cliente(request):
         return render(request, 'clientes/mostra_cliente.html', contexto)
 
 
+def deleta_cliente(request, cliente_id):
+    cliente = Cliente.objects.get(id=cliente_id)
+    cliente.delete()
+    return redirect('lista_clientes')
+
+def altera_cliente(request, cliente_id):
+    cliente = Cliente.objects.get(id=cliente_id)
+    if request.method == 'POST':
+        form = ClientesForms(request.POST, request.FILES, instance=cliente)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_clientes')
+    else:
+        form = ClientesForms(instance=cliente)
+    cliente_editar = { 'form':form }
+    return render(request, 'clientes/edita_cliente.html', cliente_editar)
+

@@ -7,6 +7,7 @@
                     {% for produto in produtos %}
                     <div class="col-12 col-sm col-lg-4">
                         <div class="single-product-area">
+                        <a href="{% url 'produto' produto.id %}">
                             {% if produto.foto_produto == '' %}
                                 <img src="" alt="">
                             {% else %}
@@ -15,6 +16,7 @@
                             <div class="product-content">
                                 <h5>{{ produto.nome_produto }}</h5>
                             </div>
+                        </a>
                         </div>
                     </div>
                     {% endfor %}

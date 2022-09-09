@@ -34,6 +34,14 @@ section{
       width: 350px;
       height: 230px;
       object-fit: cover;}
+    .single-product-area a{
+      text-decoration: none;
+      color: black;
+    }
+    .single-product-area a:hover{
+      text-decoration: none;
+      color: #ac763a;
+    }
     .single-product-area .product-content {
       padding-top: 30px;
       text-align: center; }
@@ -44,6 +52,7 @@ section{
         -webkit-transition-duration: 500ms;
         transition-duration: 500ms; }
         .single-product-area .product-content h5:hover, .single-product-area .product-content h5:focus {
+          text-decoration: none;
           color: #ac763a; }
       .single-product-area .product-content .ratings i {
         font-size: 11px;

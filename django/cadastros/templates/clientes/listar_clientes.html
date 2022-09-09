@@ -4,8 +4,6 @@
         <table class="table mt-4">
             <th scope="col">Nome</th>
             <th scope="col">Endereço</th>
-            <th scope="col">Bairro</th>
-            <th scope="col">Cidade</th>
             <th scope="col">Estado</th>
             <th scope="col">CEP</th>
             <th scope="col">CNPJ</th>
@@ -15,12 +13,13 @@
                 <tr>
                     <td class="cliente-nome">{{ cliente.nome_cliente }}</td>
                     <td class="cliente-endereco">{{ cliente.endereco }}</td>
-                    <td class="cliente-bairro">{{ cliente.bairro }}</td>
-                    <td class="cliente-cidade">{{ cliente.cidade }}</td>
                     <td class="cliente-estado">{{ cliente.estado }}</td>
                     <td class="cliente-cep">{{ cliente.cep }}</td>
                     <td class="cliente-cnpj">{{ cliente.cnpj }}</td>
-                    <td></td>
+                    <td>
+                        <a class="btn btn-warning" type="button" href="{% url 'altera_cliente' cliente.id %}">Alterar</a>
+                        <a class="btn btn-danger" type="button" href="{% url 'deleta_cliente' cliente.id %}">Deletar</a>
+                    </td>
                 </tr>
                 {% endfor %}
             {% endif %}

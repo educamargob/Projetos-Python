@@ -10,7 +10,7 @@ class Produtos(models.Model):
     preco = models.CharField(max_length=70)
     descricao = models.CharField(max_length=70)
     data_criacao = models.DateTimeField(default=datetime.now, blank=True)
-    foto_produto = models.ImageField(upload_to='fotos/%d/%m/%Y/', blank=True)
+    foto_produto = models.ImageField(upload_to='fotos/%Y/%m/%d/', blank=True)
     def __str__(self):
         return self.nome_produto
 

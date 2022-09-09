@@ -48,7 +48,7 @@ def cria_produto(request):
 
 def deleta_produto(request, produto_id):
     """Deletar um produto do sistema"""
-    produto = get_object_or_404(Produtos, pk=produto_id)
+    produto = Produtos.objects.get(id=produto_id)
     produto.delete()
     return redirect('lista_produtos')
 
@@ -65,12 +65,12 @@ def altera_produto(request, produto_id):
     produto_editar = { 'form':form }
     return render(request, 'produtos/edita_produto.html', produto_editar)
 
+def produto(request, produto_id):
+    produto = Produtos.objects.get(id=produto_id)
+    dados = {
+        'produto':produto
+    }
+    return render(request, 'produtos/produto.html', dados)
 
-            
-def mostra_produto(request):
-    if request.method == 'POST':
-        form = ProdutosForms(request.POST)
-        contexto = { 'form':form }
-        return render(request, 'produtos/mostra_produto.html', contexto)
 
 
