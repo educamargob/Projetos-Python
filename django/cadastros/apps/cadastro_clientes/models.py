@@ -1,5 +1,5 @@
 from django.db import models
-"""from datetime import datetime
+from datetime import datetime
 from django.contrib.auth.models import User
 
 class Cliente(models.Model):
@@ -13,4 +13,4 @@ class Cliente(models.Model):
     data_criacao = models.DateTimeField(default=datetime.now, blank=True)
     def __str__(self):
         return self.nome
-"""
+

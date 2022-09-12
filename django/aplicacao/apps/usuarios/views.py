@@ -38,7 +38,6 @@ def login(request):
         email = request.POST['email']
         senha = request.POST['password']
         if email == "" or senha == "":
-            
             return redirect('login')
         if User.objects.filter(email=email).exists():
             nome = User.objects.filter(email=email).values_list('username', flat=True).get()
