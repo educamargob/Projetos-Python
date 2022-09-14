@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render, get_list_or_404, redirect
 from produtos.models import Produtos, Categorias
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.admin.views.decorators import staff_member_required
 from .forms import *
 
 def index(request):
@@ -16,7 +18,6 @@ def index(request):
     dados = {
         'produtos' : produtos_por_pagina
     }
-
     return render(request, 'index.html', dados)
 
 def lista_produtos(request):
@@ -29,11 +30,15 @@ def lista_produtos(request):
     }
     return render(request, 'produtos/listar_produtos.html', dados)
 
+@login_required
+@staff_member_required
 def cadastro_produtos(request):
     form = ProdutosForms()
     contexto = {'form':form}
     return render(request, 'produtos/cadastro_produtos.html', contexto)
 
+@login_required
+@staff_member_required
 def cria_produto(request):
     """Inserir produto no sistema"""
     if request.method == 'POST':
@@ -45,12 +50,16 @@ def cria_produto(request):
             contexto = { 'form':form }
             return render(request, 'produtos/cadastro_produtos.html', contexto)
 
+@login_required
+@staff_member_required
 def deleta_produto(request, produto_id):
     """Deletar um produto do sistema"""
     produto = Produtos.objects.get(id=produto_id)
     produto.delete()
     return redirect('lista_produtos')
 
+@login_required
+@staff_member_required
 def altera_produto(request, produto_id):
     """Alterar dados de um produto"""
     produto = Produtos.objects.get(id=produto_id)
@@ -63,6 +72,7 @@ def altera_produto(request, produto_id):
         form = ProdutosForms(instance=produto)
     produto_editar = { 'form':form }
     return render(request, 'produtos/edita_produto.html', produto_editar)
+
 
 def produto(request, produto_id):
     produto = Produtos.objects.get(id=produto_id)

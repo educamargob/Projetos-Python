@@ -2,9 +2,14 @@ from django.shortcuts import render
 from django.shortcuts import render, get_list_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth, messages
+from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.admin.views.decorators import staff_member_required
 from .forms import *
 
+
 def cadastro_usuario(request):
+    """Realiza o cadastro de usuários ou mostra a tela de cadastro"""
     if request.method == 'POST':
         form = cadastroClienteForms(request.POST)
         if form.is_valid():
@@ -52,3 +57,22 @@ def logout_usuario(request):
     """Realiza o logout no sistema"""
     auth.logout(request)
     return redirect('index')
+
+@login_required
+@staff_member_required
+def listar_usuarios(request):
+    """Mostrar usuários cadastrados no sistema"""
+    usuarios = User.objects.order_by('-date_joined')
+    paginator = Paginator(usuarios, 50)
+    page = request.GET.get('page')
+    usuarios_por_pagina = paginator.get_page(page)
+    dados = {
+        'usuarios' : usuarios_por_pagina
+    }
+    return render(request, 'usuarios/lista_usuarios.html', dados)
+
+def altera_usuario(request):
+    pass
+
+def deleta_usuario(request):
+    pass

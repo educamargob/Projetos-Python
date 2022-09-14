@@ -2,7 +2,7 @@
 {% block content %}
 {% load widget_tweaks %}
 <section>
-    <form action="{% url 'cria_cliente' %}" id="cliente_form" method="POST">
+    <form action="{% url 'cadastro_clientes' %}" id="cliente_form" method="POST">
         {% csrf_token %}
         {% for field in form.visible_fields %}
         <div class="form-group" id="id_{{field.label}}">

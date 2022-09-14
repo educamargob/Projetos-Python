@@ -3,9 +3,14 @@ from django.shortcuts import get_object_or_404, render, get_list_or_404, redirec
 from django.http import HttpResponse
 from cadastro_clientes.models import Cliente, Estados
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.admin.views.decorators import staff_member_required
 from .forms import *
 
+@login_required
+@staff_member_required
 def lista_clientes(request):
+    """Listar os clientes cadastrados"""
     clientes = Cliente.objects.order_by('-data_criacao')
     paginator = Paginator(clientes, 10)
     page = request.GET.get('page')
@@ -15,13 +20,10 @@ def lista_clientes(request):
     }
     return render(request, 'clientes/listar_clientes.html', dados)
 
+@login_required
+@staff_member_required
 def cadastro_clientes(request):
-    form = ClientesForms()
-    contexto = {'form':form}
-    return render(request, 'clientes/cadastro_clientes.html', contexto)
-
-def cria_cliente(request):
-    """Inserir cliente no sistema"""
+    """Cadastro de clientes"""
     if request.method == 'POST':
         form = ClientesForms(request.POST)
         if form.is_valid():
@@ -38,19 +40,20 @@ def cria_cliente(request):
         else:
             contexto = {'form':form}
             return render(request, 'clientes/cadastro_clientes.html', contexto)
-            
-def mostra_cliente(request):
-    if request.method == 'POST':
-        form = ClientesForms(request.POST)
+    else:
+        form = ClientesForms()
         contexto = {'form':form}
-        return render(request, 'clientes/mostra_cliente.html', contexto)
+        return render(request, 'clientes/cadastro_clientes.html', contexto)
 
-
-def deleta_cliente(request, cliente_id):
+@login_required  
+@staff_member_required
+def deleta_cliente(cliente_id):
     cliente = Cliente.objects.get(id=cliente_id)
     cliente.delete()
     return redirect('lista_clientes')
 
+@login_required  
+@staff_member_required
 def altera_cliente(request, cliente_id):
     cliente = Cliente.objects.get(id=cliente_id)
     if request.method == 'POST':
