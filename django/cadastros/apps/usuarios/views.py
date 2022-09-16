@@ -60,7 +60,7 @@ def logout_usuario(request):
 
 @login_required
 @staff_member_required
-def listar_usuarios(request):
+def lista_usuarios(request):
     """Mostrar usuários cadastrados no sistema"""
     usuarios = User.objects.order_by('-date_joined')
     paginator = Paginator(usuarios, 50)

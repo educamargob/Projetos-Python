@@ -25,7 +25,7 @@
             {% endif %}
         </table>
         <div class="row">
-            <div class="container">
+            <div class="col-9">
                 {% if clientes.has_other_pages %}
                     <ul class="pagination">
                         {% if clientes.has_previous %}
@@ -60,7 +60,7 @@
                     </ul>
                 {% endif %}
             </div>
-            <a href="{% url 'cadastro_clientes' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Cadastrar novo cliente</a>
+            <div class="col-3"><a href="{% url 'cadastro_clientes' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Cadastrar novo cliente</a></div>
         </div>
     </section>
 {% endblock %}

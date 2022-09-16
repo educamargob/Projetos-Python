@@ -2,19 +2,22 @@
 {% block content %}
     <section class="product-area">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-between">
                 {% if produtos %}
                     {% for produto in produtos %}
-                    <div class="col-12 col-sm col-lg-4">
+                    <div class="col">
                         <div class="single-product-area">
                         <a href="{% url 'produto' produto.id %}">
                             {% if produto.foto_produto == '' %}
                                 <img src="" alt="">
                             {% else %}
-                                <img src="{{ produto.foto_produto.url }}" alt="foto-produto" style="width: 350px; height: 230px; object-fit: cover;">
+                                <img src="{{ produto.foto_produto.url }}" alt="foto-produto" style="width: 100%; height: 132px; object-fit: cover;">
                             {% endif %}
                             <div class="product-content">
                                 <h5>{{ produto.nome_produto }}</h5>
+                                <h5>R${{ produto.preco|stringformat:".2f" }}</h5>
+                                <h6>À vista no PIX</h6>
+                                <button class="btn btn-primary">COMPRAR</button>
                             </div>
                         </a>
                         </div>

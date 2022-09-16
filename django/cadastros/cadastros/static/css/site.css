@@ -14,8 +14,10 @@ body{
     padding-bottom: 100px;
 }
 #conteudo{
+  min-width: 90%;
   min-height: 100%;
   position: relative;
+  background-color: #FAFAFB;
 }
 .nav-item{
     margin: 0 10px 0 10px
@@ -32,18 +34,25 @@ footer{
 section{
     margin: 15px 0 15px 0;
 }
-
 .product-area {
     position: relative;
     z-index: 1;
     padding-bottom: 50px; }
   
   .single-product-area {
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    max-width: 268px;
     position: relative;
     z-index: 1; 
-}
+    transition: box-shadow 200ms ease 0s;
+    box-shadow: rgba(12, 12, 17, 0.075) 0px 0px 1px, rgba(56, 57, 68, 0.089) 0px 0.5px 2px;
+  }
+    .single-product-area:hover{
+      box-shadow: rgb(40 41 61 / 8%) 0px 0px 10px, rgba(96, 97, 112, 0.205) 0px 5px 8px;
+    }
     .single-product-area img {
-      border-bottom: 3px solid #ac763a;
       width: 350px;
       height: 230px;
       object-fit: cover;}
@@ -53,11 +62,13 @@ section{
     }
     .single-product-area a:hover{
       text-decoration: none;
-      color: #ac763a;
+      color: black;
     }
     .single-product-area .product-content {
-      padding-top: 30px;
-      text-align: center; }
+      padding-top: 5px;
+      text-align: left; }
+    .single-product-area .product-content button {
+        width: 100%; }
       .single-product-area .product-content h5 {
         font-size: 18px;
         margin-bottom: 10px;
@@ -65,10 +76,8 @@ section{
         -webkit-transition-duration: 500ms;
         transition-duration: 500ms; }
         .single-product-area .product-content h5:hover, .single-product-area .product-content h5:focus {
-          text-decoration: none;
-          color: #ac763a; }
+          text-decoration: none; }
       .single-product-area .product-content .ratings i {
         font-size: 11px;
-        color: #fbb710;
         display: inline-block;
         padding: 0 1px; }

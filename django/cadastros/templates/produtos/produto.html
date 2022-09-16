@@ -11,7 +11,7 @@
                         <img src="{{ produto.foto_produto.url }}" alt="foto-produto" style="width: 650px; height: 500px; object-fit: cover;">
                     </div>
                     <div class="product-desc col">
-                        <h6>R$ <span class="mask-preco">{{ produto.preco }}</span></h6>
+                        <h6>{{ produto.preco|stringformat:".2f" }}</h6>
                         <h6>Descrição: {{ produto.descricao }}</h6>
                         <a href="#" class="btn btn-primary">Comprar</a>
                     </div>
