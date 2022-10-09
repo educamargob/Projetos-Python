@@ -1,6 +1,8 @@
 {% load static %}
+{% load webpush_notifications %}
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <link rel="stylesheet" href="{% static 'css/site.css' %}">
     <meta charset="UTF-8">
@@ -13,66 +15,70 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static 'js/jquery.mask.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/geral.js' %}"></script>
+    {% webpush_header %}
     {{ form.media }}
     <title>Cadastros</title>
 </head>
+{% webpush_button %}
+
 <body>
     <div class="bg-light">
         <nav class="navbar navbar-expand-lg navbar-light bg-light container">
             <a class="navbar-brand" href="{% url 'index' %}">New Fapper</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                  <li class="nav-item">
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-                        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"><img src="{% static 'img/lupa.png' %}" alt=""></button>
-                      </form>
-                  </li>
+                    <li class="nav-item">
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"><img src="{% static 'img/lupa.png' %}" alt=""></button>
+                        </form>
+                    </li>
                 </ul>
                 <div class="dropdown">
-                    <button class="btn" type="button" id="dropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    <button class="btn" type="button" id="dropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="{% static 'img/user.png' %}" alt=""> {% if not user.is_authenticated %}Entrar{% endif %}
-                      </button>
+                    </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         {% if user.is_authenticated %}
-                            <a href="#" class="dropdown-item">Meus Pedidos</a>
-                            <a href="#" class="dropdown-item">Endereços</a>
-                            <a href="{% url 'logout_usuario' %}" class="dropdown-item">Sair</a>
-                            {% if user.is_superuser %}
-                                <div class="dropdown-divider"></div>
-                                <a href="{% url 'lista_clientes' %}" class="dropdown-item">Clientes</a>
-                                <a href="{% url 'lista_produtos' %}" class="dropdown-item" >Produtos</a>
-                                <a href="{% url 'lista_usuarios' %}" class="dropdown-item" >Usuários</a>
-                            {% endif %}
+                        <a href="#" class="dropdown-item">Meus Pedidos</a>
+                        <a href="#" class="dropdown-item">Endereços</a>
+                        <a href="{% url 'logout_usuario' %}" class="dropdown-item">Sair</a>
+                        {% if user.is_staff %}
+                        <div class="dropdown-divider"></div>
+                        <a href="{% url 'lista_clientes' %}" class="dropdown-item">Clientes</a>
+                        <a href="{% url 'lista_produtos' %}" class="dropdown-item">Produtos</a>
+                        <a href="{% url 'lista_usuarios' %}" class="dropdown-item">Usuários</a>
+                        {% endif %}
                         {% else %}
-                            <a class="dropdown-item" href="{% url 'login_usuario' %}">Login</a>
+                        <a class="dropdown-item" href="{% url 'login_usuario' %}">Login</a>
                         {% endif %}
                     </div>
                 </div>
                 <button class="btn my-2 my-sm-0" type="submit"><img src="{% static 'img/cart.png' %}" alt=""></button>
-              </div>
+            </div>
         </nav>
     </div>
     <section id="conteudo" class="container my-2">
         {% block content %}{% endblock %}
     </section>
-    <footer class="py-1 mb-0 bg-light">
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-muted">teste</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-muted">teste</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-muted">teste</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-muted">teste</a>
-                </li>
-            </ul>
-            <p class="text-center text-muted">@ 2022 Company, Inc</p>
-    </footer>
-    
+    <div class="py-1 mb-0 bg-light" style="position: relative;">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">teste</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">teste</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">teste</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">teste</a>
+            </li>
+        </ul>
+        <p class="text-center text-muted">@ 2022 Company, Inc</p>
+    </div>
+
 </body>
+
 </html>

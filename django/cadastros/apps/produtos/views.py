@@ -1,12 +1,15 @@
 from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, get_list_or_404, redirect
 from produtos.models import Produtos, Categorias
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.admin.views.decorators import staff_member_required
 from .forms import *
+from webpush import send_user_notification
+
 
 def index(request):
     """Mostrar a página principal para o usuário com sistema de paginas"""
@@ -18,6 +21,10 @@ def index(request):
     dados = {
         'produtos' : produtos_por_pagina
     }
+    
+    payload = {"head": "Welcome!", "body": "Hello World"}
+    usuario = User.objects.get(id=3)
+    send_user_notification(user=usuario, payload=payload, ttl=1000)
     return render(request, 'index.html', dados)
 
 def lista_produtos(request):

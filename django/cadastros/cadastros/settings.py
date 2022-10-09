@@ -14,6 +14,7 @@ import os, sys
 from pathlib import Path
 from re import M
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -33,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'webpush',
     'usuarios',
     'produtos',
     'cadastro_clientes',
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -145,3 +148,9 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, '../apps'))
 # Redireciona com autenticação
 LOGIN_REDIRECT_URL = ''
 LOGIN_URL='/usuario/login'
+
+WEBPUSH_SETTINGS = {
+    "VAPID_PUBLIC_KEY": "BLxQTDCSS-DKg6nn-qCOnfVX7ovzLGQxmW-Lxvu-zmKTOf1t_cF-gZbb8uscs4Th_Y1kmlNeZSNNyoGskK8TltM",
+    "VAPID_PRIVATE_KEY":"iNSQq-_VHBiRTOZN2IVrM2dJ_fbgQQf0e5QXnuQ1lzk",
+    "VAPID_ADMIN_EMAIL": "ecamargoborges@gmail.com"
+}

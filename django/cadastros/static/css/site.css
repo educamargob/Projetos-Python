@@ -11,14 +11,10 @@ body{
 .nav-item{
     margin: 0 10px 0 10px
 }
-footer{
-    --bs-bg-opacity: 1;
-    margin-top: auto;
-}
+
 section{
     margin: 15px 0 15px 0;
 }
-
 
 .product-area {
     position: relative;

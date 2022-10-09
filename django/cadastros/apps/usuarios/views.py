@@ -71,8 +71,24 @@ def lista_usuarios(request):
     }
     return render(request, 'usuarios/lista_usuarios.html', dados)
 
-def altera_usuario(request):
-    pass
+@login_required
+@staff_member_required
+def altera_usuario(request, usuario_id):
+    usuario = User.objects.get(id=usuario_id)
+    if request.method == 'POST':
+        form = cadastroClienteForms(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_usuarios')
+        else:
+            usuario_editar = {'form':form}
+            return render(request, 'usuarios/edita_usuario.html', usuario_editar)
+    else:
+        form = cadastroClienteForms(instance=usuario)
+    usuario_editar = {'form':form}
+    return render(request, 'usuarios/edita_usuario.html', usuario_editar)
 
+@login_required
+@staff_member_required
 def deleta_usuario(request):
     pass

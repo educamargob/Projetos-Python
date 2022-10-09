@@ -36,16 +36,20 @@ django.jQuery(function(){
     const buscaEndereco = (cep) => {
         const url = `http://viacep.com.br/ws/${cep}/json/`
         django.jQuery.get( url, function( data ) {
-        
         if(data.erro == 'true'){
-            var section = $("<section />");
-            section.append("<ul><li>CEP informado é inválido</li></ul>")
-            section.attr({
-                class:"alert alert-danger", 
-                role:"alert"
-            });
-            $('#id_CEP').append(section);
+            if($('.alert-danger')[0] == null){
+                var section = $("<section />");
+                section.append("<ul><li>CEP informado é inválido</li></ul>")
+                section.attr({
+                    class:"alert alert-danger", 
+                    role:"alert"
+                });
+                $('#id_CEP').append(section);
+            }else{
+                $('.alert-danger')[0].style.display = 'block';
+            }
         }else{
+            $('.alert-danger')[0].style.display = 'none';
             console.log(data)
             preencheForm(data); 
         }                            
