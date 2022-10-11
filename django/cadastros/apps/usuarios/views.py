@@ -1,3 +1,4 @@
+import time
 from django.shortcuts import render
 from django.shortcuts import render, get_list_or_404, redirect
 from django.contrib.auth.models import User
@@ -6,7 +7,60 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.admin.views.decorators import staff_member_required
 from .forms import *
+from webpush import send_user_notification
+from usuarios.models import Mensagens
+from firebase_admin.messaging import Message, Notification
+from firebase_admin.messaging import Message
+from fcm_django.models import FCMDevice
 
+
+def cadastro_notificacao(request):
+    """Realiza o cadastro de push-notifications ou mostra a tela de cadastro"""
+    if request.method == 'POST':
+        form = cadastroMensagemForms(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('cadastro_usuario')
+        else:
+            form = cadastroMensagemForms(request.POST, request.FILES)
+            contexto = {
+                'form':form
+            }
+            return render(request, 'usuarios/login.html', contexto)
+    else:
+        form = cadastroMensagemForms()
+        contexto = {
+            'form' : form
+        }
+        return render(request, 'notificacoes/cadastro_notificacoes.html', contexto)
+
+
+def teste2(request):
+    device = FCMDevice.objects.all().first()
+    device.send_message(Message(
+        notification=Notification(title="title", body="text", image="url"),
+        topic="Optional topic parameter: Whatever you want",
+    ))
+def teste(request):
+    mensagens = Mensagens.objects.order_by('-data_criacao').filter(habilitada=True)
+    x = 0
+    while x == 0:
+        for mensagem in mensagens:
+            icone = ''
+            if mensagem.icon:
+                icone = mensagem.icon.url
+            else:
+                icone = 'https://universo.adami.com.br/static/user/assets/images/logo_universo.png'
+
+            payload = {"head": mensagem.titulo, "body": mensagem.corpo_mensagem,
+                        "icon": icone, "url": "http://127.0.0.1:8000/"}    
+            print(payload)
+            usuario = User.objects.get(id=1)
+            send_user_notification(user=usuario, payload=payload, ttl=1000)
+            time.sleep(15)
+            x = 0
+    return render(request, 'index.html')
+    
 
 def cadastro_usuario(request):
     """Realiza o cadastro de usuários ou mostra a tela de cadastro"""

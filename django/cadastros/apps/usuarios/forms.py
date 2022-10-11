@@ -3,7 +3,15 @@ from unittest.util import _MAX_LENGTH
 from django import forms
 from usuarios.validation import *
 from datetime import datetime
+from usuarios.models import Mensagens
 
+class cadastroMensagemForms(forms.ModelForm):
+    data_criacao = forms.DateField(label='Data da criação', disabled=True, initial=datetime.today)
+    class Meta:
+        model = Mensagens
+        fields = '__all__'
+        labels = {'icon':'Icone'}
+        
 class loginClienteForms(forms.Form):
     email = forms.CharField(label='Email', max_length=100, widget=forms.EmailInput())
     senha = forms.CharField(label='Senha', max_length=100, widget=forms.PasswordInput())
