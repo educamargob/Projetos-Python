@@ -1,0 +1,18 @@
+<div class="push-web-notification">
+    <div class="container">
+        <div class="push-text">
+            <span>Deseja receber as notificações em tempo real?</span>
+            <span><b>Ative as notificaçoes do Universo Adami</b></span>
+        </div>
+        <div class="push-button">
+            <button>Agora não</button>
+            <button class="ativar" onclick="requestPermission()">Ativar</button>
+        </div>
+        <form action="{% url 'devices' %}" method="POST" id="form-id">
+            {% csrf_token %}
+            <input type="text" name="registration_id" id="registration_id">
+            <input type="text" name="web" id="web">
+            <input type="submit">
+        </form>
+    </div>
+</div>
