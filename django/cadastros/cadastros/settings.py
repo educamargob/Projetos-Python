@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os, sys
 
-from pathlib import Path
+from pathlib import Path, os
+from dotenv import load_dotenv
+load_dotenv()
 from re import M
 import firebase_admin
 from firebase_admin import credentials
@@ -25,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fwcv6@bpij^f&o2eido-db**nh$w0)9q7z&!j^(fb+-k5!4a4n'
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -36,6 +38,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_apscheduler',
     'fcm_django',
     'webpush',
     'usuarios',
@@ -48,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cadastros.app.CadastrosConfig'
 ]
 
 
@@ -55,7 +59,7 @@ GOOGLE_APPLICATION_CREDENTIALS = (r"C:\Users\eduardo.borges\Desktop\Projetos-Pyt
 # FIREBASE_APP = initialize_app()
 
 FCM_DJANGO_SETTINGS = {
-    "FCM_SERVER_KEY": "AAAAiKKMkCs:APA91bHOIpPPBaASHfDkrtGOSjg9nZTJUYySRuo2VzNn5pq8Lp_p9hmh36qYF_pfnBle5ytVvXT_ON-RXuFNFbsa_fi48Ao9QogNw0N93BR4PG_eq_Dd_WPAHCVVX8eVXbfksboutHVA",
+    "FCM_SERVER_KEY": str(os.getenv('FCM_SERVER_KEY')),
      # an instance of firebase_admin.App to be used as default for all fcm-django requests
      # default: None (the default Firebase app)
     "ONE_DEVICE_PER_USER": True,
@@ -161,7 +165,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 PROJECT_ROOT = os.path.dirname(__file__)
 sys.path.insert(0, os.path.join(PROJECT_ROOT, '../apps'))
 
-cred = credentials.Certificate(r"C:\Users\eduardo.borges\Desktop\Projetos-Python\django\cadastros\cadastros\credentials.json")
+cred = credentials.Certificate(r"C:\Users\eduardo.borges\Desktop\Projetos-Python\django\cadastros\credentials.json")
 firebase_admin.initialize_app(cred)
 
 # Redireciona com autenticação
