@@ -18,16 +18,17 @@ def contabiliza_voto(voto, enquete):
     else:
         print('SELEÇÃO INCORRETA')
 
+
 inserir = True
-enquete = [1500,3500,3000,500,150,150]
+#enquete = [1500,3500,3000,500,150,150]
+enquete = []
+sistemas = ['Windows Server', 'Unix', 'Linux', 'Netware', 'Mac OS', 'Outro']
+for sistema in sistemas:
+    enquete.append(0)
 while inserir:
     print("Qual o melhor Sistema Operacional para uso em servidores?")
-    print("1 - Windows Server")
-    print("2 - Unix")
-    print("3 - Linux")
-    print("4 - Netware")
-    print("5 - Mac OS")
-    print("6 - Outro")
+    for sistema in sistemas:
+        print(f"{sistemas.index(sistema)+1} - {sistema}")
     voto = int(input())
     if voto == 0:
         inserir = False
@@ -36,14 +37,22 @@ while inserir:
 
 soma_votos = sum(enquete)
 
-print('Sistema Operacional     Votos   %')
-print('-------------------     -----   ---')
-print(f'Windows Server           {enquete[0]}   17%')
-print(f'Unix                     {enquete[1]}   17%')
-print(f'Linux                    {enquete[2]}   17%')
-print(f'Netware                  {enquete[3]}   17%')
-print(f'Mac OS                   {enquete[4]}   17%')
-print(f'Outro                    {enquete[5]:<2}   17%')
-print('-------------------     -----')
-print(f'Total                    {soma_votos}')
-#print(f'O Sistema Operacional mais votado foi o {}, com {} votos, correspondendo a {} dos votos.')
+if sum(enquete) != 0:
+    maior = 0
+    sis = ""
+    per = 0
+    print('Sistema Operacional     Votos    %')
+    print('-------------------     -----   ----')
+    for sistema in sistemas:
+        porcentagem = round(enquete[sistemas.index(sistema)] / sum(enquete) * 100)
+        print(f"{sistema:<24}{enquete[sistemas.index(sistema)]:>5}{porcentagem:>6}%")
+        if maior < enquete[sistemas.index(sistema)]:
+            maior = enquete[sistemas.index(sistema)]
+            sis = sistema
+            per = porcentagem
+
+    print('-------------------     -----')
+    print(f'Total{soma_votos:>24}')
+    print(f'O Sistema Operacional mais votado foi o {sis}, com {maior} votos, correspondendo a {per}% dos votos.')
+else:
+    print("A enquete não possui votos...")
